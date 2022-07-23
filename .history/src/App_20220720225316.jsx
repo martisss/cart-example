@@ -1,0 +1,110 @@
+import { Card } from 'antd-mobile'
+import { Outlet } from 'react-router-dom'
+import { Card, Toast, Button } from 'antd-mobile'
+import { DemoBlock } from 'demos'
+import { AntOutline, RightOutline } from 'antd-mobile-icons'
+import { Routes, Route, Link } from 'react-router-dom'
+import styled from 'styled-components'
+function App() {
+  return (
+    <div className="App">
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="test" element={<Test></Test>}></Route>
+        <Route path="about" element={<About />}></Route>
+        <Route path="homedetail" element={<HomeDetail />}></Route>
+      </Routes>
+    </div>
+  )
+}
+
+function HomeDetail() {
+  return <div>HomeDetail</div>
+}
+
+function Test() {
+  return <div>test</div>
+}
+
+function Home() {
+  console.log('test ')
+  return (
+    <>
+      <Main></Main>
+      <Footer />
+    </>
+  )
+}
+
+const Main = () => {
+  return (
+    <MainWrapper>
+      <Card
+        title={
+          <div>
+            <AntOutline />
+            卡片标题
+          </div>
+        }
+        extra={<RightOutline />}
+        // onBodyClick={onBodyClick}
+        // onHeaderClick={onHeaderClick}
+        style={{ borderRadius: '16px' }}
+      >
+        <div>卡片内容</div>
+        <div onClick={(e) => e.stopPropagation()}>
+          <Button
+            color="primary"
+            onClick={() => {
+              Toast.show('点击了底部按钮')
+            }}
+          >
+            底部按钮
+          </Button>
+        </div>
+      </Card>
+    </MainWrapper>
+  )
+}
+
+const MainWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+`
+
+const Footer = () => {
+  return (
+    <FooterWrapper>
+      <div style={{ width: '5rem' }}>购物车</div>
+      <div>去支付</div>
+    </FooterWrapper>
+  )
+}
+
+const FooterWrapper = styled.div`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+`
+
+function About() {
+  return (
+    <div>
+      <main>
+        <h2>Welcome to the about page</h2>
+      </main>
+      <nav>
+        <ol>
+          <Link to="/">home</Link>
+          <Link to="/about">about</Link>
+        </ol>
+      </nav>
+    </div>
+  )
+}
+export default App
